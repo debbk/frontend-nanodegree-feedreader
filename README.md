@@ -1,4 +1,17 @@
-# Project Overview
+Nanodegree Feedreader Project
+-----------------------------
+This website shows 4 blogs that may be cycled through a hidden menu.
+This project tests the functionality of the website using Jasmine, as per the specs below.
+
+Installation
+------------
+To run the file on your local machine, you may either clone the repository using GIT and open the index.html file with your favorite browser.
+Alternatively, you can simply view the project here: http://debbk.github.io/frontend-nanodegree-feedreader
+Once launched, Jasmine will run and the test results will be displayed at the bottom of the page.
+
+------------------------------------------------------------------
+
+# Project Overview and Specs
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
 
