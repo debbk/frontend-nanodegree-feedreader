@@ -56,7 +56,6 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it('is hidden by default', function() {
-            var body = document.body;
             expect($('body').hasClass('menu-hidden')).toBeTruthy();
         });
          /* This test ensures the menu changes
@@ -65,7 +64,6 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
         it('changes visibility when the icon is clicked', function() {
-            var body = document.body;
             /* Trigger a click event to 'open' menu */
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBeFalsy();
@@ -91,7 +89,7 @@ $(function() {
         it('has at least one .entry element within the .feed container', function () {
             var feeds = $('.feed .entry');
             //expect(feeds).toBeDefined();
-            expect(feeds.length).toBeGreaterThan(1);
+            expect(feeds.length).toBeGreaterThan(0);
         });
     });
 
