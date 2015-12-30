@@ -29,7 +29,7 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        it('have a URL', function() {
+        it('URL of allFeeds are defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
@@ -39,7 +39,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-        it('have a name', function() {
+        it('Name of allFeeds are defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe(0);
@@ -57,7 +57,7 @@ $(function() {
          */
         it('is hidden by default', function() {
             var body = document.body;
-            expect(body.className).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBeTruthy();
         });
          /* This test ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -68,10 +68,10 @@ $(function() {
             var body = document.body;
             /* Trigger a click event to 'open' menu */
             $('.menu-icon-link').trigger('click');
-            expect(body.className).not.toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBeFalsy();
             /* Trigger a click event to 'close' menu */
             $('.menu-icon-link').trigger('click');
-            expect(body.className).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBeTruthy();
             // Reference: http://stackoverflow.com/questions/10823790/testing-a-click-event-with-jasmine-that-appends-a-style-sheet-to-the-head
         });
     });
@@ -89,8 +89,9 @@ $(function() {
             loadFeed(0, done);
         });
         it('has at least one .entry element within the .feed container', function () {
-            expect($('.feed.entries')).toBeDefined();
-            expect($('.feed').length).not.toBe(0);
+            var feeds = $('.feed .entry');
+            //expect(feeds).toBeDefined();
+            expect(feeds.length).toBeGreaterThan(1);
         });
     });
 
@@ -101,27 +102,21 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        var initial;
-        beforeEach(function (done) {
+        var initialFeed, newFeed;
+        beforeEach(function (done){
             $('.feed').empty();
             /* load feed '0' - the Udacity blog in this case */
             loadFeed(0, function() {
-                initial=$('.feed').html();
-                done();
+                initialFeed = $('.feed').html();
+                $('.feed').empty();
+                /* load feed '1' - CSS tricks in this case */
+                loadFeed(1, done);
             });
         });
+
         it('should change when a new feed is loaded', function() {
-            var newfeed;
-            $('.feed').empty();
-            /* load feed '1' - CSS tricks in this case */
-            loadFeed(1, function() {
-                newfeed=$('.feed').html();
-                /* check that both feeds are defined */
-                expect(initial).toBeDefined();
-                expect(newfeed).toBeDefined();
-                done();
-            });
-        expect(newfeed).not.toEqual(initial);
+            newFeed=$('.feed').html();
+            expect(newFeed).not.toEqual(initialFeed);
         });
     });
 }());
